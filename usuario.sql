@@ -15,11 +15,19 @@ describe usuario;
 insert into usuarios (usuario,login,senha)
 values ('walace','admin','1234');
 insert into usuarios (usuario,login,senha)
-values ('dante','admin','1234');
+values ('dante','usuario','1234');
+insert into usuarios (usuario,login,senha)
+values ('ferdi','usuario','1234');
 
+insert into usuarios (usuario,login,senha)
+values ('gabi','usuario','1234');
+
+insert into usuarios (usuario,login,senha)
+values ('Bianca','usuario','1234');
 -- armezenando um campo com criptografia
+
 insert into usuario(usuarios,login,senha)
-values ('walace','walace@usuario',md5('1234'));
+values ('kratos','kratos@usuario',md5('1234'));
 alter table usuarios modify senha varchar (250);  
 alter table usuarios modify login varchar(50);
 
