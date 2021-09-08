@@ -139,5 +139,21 @@ select nome,fone from contatos order by nome asc;
 -- filtrar nomes que começam com a letra B
 select * from contatos where nome like 'B%';
 
+-- excluindo um registro da tabela (usar sempre o id "SEGURANÇA")
+delete from contatos where id=4;
 
+-- selecionar um registro específico
+select * from contatos where nome='Ana Maria';
+select * from contatos where id=2;
+
+-- selecionar campos específicos da tabela
+select nome from contatos;
+select nome,fone from contatos order by nome asc;
+/* CRUD UPDATE (update) */
+-- alterando um dado específico do registro da tabela (usar sempre o id "SEGURANÇA")
+
+update contatos set fone='941234-8090' where id=4;
+update contatos set email='bia@email.com' where id=2;
+-- alterando todos os dados do registro
+update contatos set nome='Willian Gates',fone='32456-9000',email='bill@outlook.com' where id=1;
 
