@@ -1,6 +1,8 @@
+/**
+Agenda de contatos
+Aluno: Jose walace
 Atividade Projeto Banco de dados usários - iniciado em 1/09/2021
 */
-
 -- Pesquisar bancos de dados disponíveis
 show databases;
 
