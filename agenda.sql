@@ -43,22 +43,6 @@ alter table usuarios modify senha varchar (250);
 alter table usuarios modify login varchar (50);
 
 --  inserir campo criptografado (número de cartão de crédito, senhas)
--- a senha obrigatória tem que estar criptografada
-
--- Armazenando um campo com criptografia (mais simples)
-insert into usuarios (usuario, login, senha)
-values ('Walace', 'admin', md5('000000'));
-/* CRUD READ (Select)*/
--- é uma espécie de relatório
--- selecionar todos os registros da tabela
-select * from usuarios;
-
--- Tabela de clientes (clientes da assistência técnica) 
-create table clientes(
-idcli int primary key auto_increment,
-nome varchar(50) not null,
-fone varchar(15) not null
-);
  
  
  
