@@ -60,31 +60,5 @@ nome varchar(50) not null,
 fone varchar(15) not null
 );
  
- describe clientes;
  
- insert into clientes (nome,fone) values ('José de Assis','91478-1152');
- insert into clientes (nome,fone) values ('Kelly Cristina','91496-1123');
  
- select * from clientes; 
- 
- -- Tabela de OS (Ordem de serviços)
- create table tbOs(
- os int primary key auto_increment,
- equipamento varchar(250) not null, 
- defeito varchar(250) not null,
- dataOs timestamp default current_timestamp, 
- statusOs varchar(50) not null, 
- valor decimal (10,2),
- idcli int not null, 
- foreign key(idcli) references clientes(idcli)
- );
- 
- describe tbOs;
- 
-insert into tbOs(equipamento,defeito,statusOs,idcli)
-values('Notebook Lenovo modelo','Não liga','Orçamento',1);
-
-insert into tbOs(equipamento,defeito,statusOs,valor,idcli)
-values('PC Positivo','Formatação do Windows','Aprovado',80,2);
-
-select * from tbOs;
