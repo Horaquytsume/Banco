@@ -2,158 +2,87 @@
 Agenda de contatos
 @author walace oliveira
 */
- -- pesquisar banco de dados disponiveis
+ create database dbinfox;
 show databases;
--- criando um banco de dados
-create database dbagendas;
+use dbinfox;
 
--- remover um banco de dados
-drop database dbagenda;
--- selecionar o banco de dados
-use dbagendas;
-
--- criando uma tabela no banco de dados
-create table contatos(
+-- Tabela de usuários (funcionários da Assistência técnica
+create table usuarios(
 id int primary key auto_increment,
-nome varchar(50) not null,
-fone varchar(15) not null,
-email varchar(50) unique
+usuario varchar(50) not null,
+login varchar(10) not null unique,
+senha varchar(10)
 );
 
+describe usuarios;
 
--- verificar tabelas disponiveis no banco
-show tables;
--- comando usado para descrever a tabela
-describe contatos;
--- comando usado para alterar o nome de um campo (cabeçalho) da tabela
-alter table contatos change nome contato varchar(50) not null;
--- Comando usado para descrever a tabela
-describe contatos;
+-- Cadastrar 5 usuários na tabela -> login (cadastrar o email) -> senha (usar criptografia)
+-- usuário 1 
+insert into usuarios (usuario, login, senha)
+values ('('Bill Gates','99999-1111','bill@email.com');, md5('111111'));
 
-drop database dbagendas;
+-- usuário 2 
+insert into usuarios (usuario, login, senha)
+values (' ('Beatriz','99999-2222');, md5('222222'));
 
--- Comando usado para alterar o nome de um campo(cabeçalho) da tabela
-alter table contatos change nome contato varchar(50) not null;
+-- usuário 3 
+insert into usuarios (usuario, login, senha)
+values  ('Linus Torvalds','99999-3333','linux@email.com'); md5('333333'));
 
+-- usuário 4 
+insert into usuarios (usuario, login, senha)
+values ('Ana Maria','99999-4444','ana@email.com'); md5('444444'));
 
+-- usuário 5 
+insert into usuarios (usuario, login, senha)
+values  ('camelo da silva','95555-1111','camelao@email.com'); md5('555555'));
 
--- Comando usado para adicionar um novo campo a tabela
-alter table contatos add column obs varchar(250);
+-- aumentar o número de caracteres para senha criptografada
+alter table usuarios modify senha varchar (250);
+-- aumentar o tamanho do nome de login 
+alter table usuarios modify login varchar (50);
 
--- comando usado para adcionar um novo campp em um lugar especifico
-alter table contatos add column fone2 varchar(15) after fone;
+--  inserir campo criptografado (número de cartão de crédito, senhas)
+-- a senha obrigatória tem que estar criptografada
 
--- comando usado para modificar o tipo de dado e/ou variçoes do campo
+-- Armazenando um campo com criptografia (mais simples)
+insert into usuarios (usuario, login, senha)
+values ('Walace', 'admin', md5('000000'));
 
-alter table contatos modify column fone2 varchar(15) not null after fone;
-alter table contatos modify email varchar (100);
-alter table contatos modify email varchar (100) unique;
--- comando usado para apagar um campo d tabela
-alter table contatos drop column fone2;
--- comando usado para remover uma tabela
-drop table contatos;
+select * from usuarios;
 
+-- Tabela de clientes (clientes da assistência técnica) 
+create table clientes(
+idcli int primary key auto_increment,
+nome varchar(50) not null,
+fone varchar(15) not null
+);
+ 
+ describe clientes;
+ 
+ insert into clientes (nome,fone) values ('José de Assis','91478-1152');
+ insert into clientes (nome,fone) values ('Kelly Cristina','91496-1123');
+ 
+ select * from clientes; 
+ 
+ -- Tabela de OS (Ordem de serviços)
+ create table tbOs(
+ os int primary key auto_increment,
+ equipamento varchar(250) not null, 
+ defeito varchar(250) not null,
+ dataOs timestamp default current_timestamp, 
+ statusOs varchar(50) not null, 
+ valor decimal (10,2),
+ idcli int not null, 
+ foreign key(idcli) references clientes(idcli)
+ );
+ 
+ describe tbOs;
+ 
+insert into tbOs(equipamento,defeito,statusOs,idcli)
+values('Notebook Lenovo modelo','Não liga','Orçamento',1);
 
-/*
-CRUD (do inglês: Create Read Update Delete)
-São as quatro operações básicas que podem ser
-realizadas em banco de dados que usam o modelo
-relacional.
+insert into tbOs(equipamento,defeito,statusOs,valor,idcli)
+values('PC Positivo','Formatação do Windows','Aprovado',80,2);
 
-
-
-CREATE (inserção do registro(dados) na tabela)
-READ (pesquisa dos dados na(s) tabela(s))
-UPDATE (alteração de algum registro da tabela)
-DELETE (exclusão de um registro da tabela)
-
-
-
-*/
-
-
-
-/* crud create (insert)*/
-
-insert into contatos (nome,fone,email)
-values ('Bill Gates','99999-1111','bill@email.com');
-
-insert into contatos (nome,fone)
-values ('Beatriz','99999-2222');
-insert into contatos (nome,fone,email)
-values ('Linus Torvalds','99999-3333','linux@email.com');
- insert into contatos (nome,fone,email)
-values ('Ana Maria','99999-4444','ana@email.com');
-
-insert into contatos (nome,fone,email)
-values ('camelo da silva','95555-1111','camelao@email.com');
-
-insert into contatos (nome,fone,email)
-values ('Renato augusto','98888-2222','renato@email.com');
-
-insert into contatos (nome,fone,email)
-values ('Duilio monteiro alves','95555-1111','duilio@email.com');
-
-
-insert into contatos (nome,fone)
-values ('Casio silva','96666-3333');
-
-insert into contatos (nome,fone,email)
-values ('Cristiano Ronaldo','91234-5678','cristiano@email.com');
-
-insert into contatos (nome,fone,email)
-values ('Caetano veloso','97777-8080','caetano@email.com');
-
-/* crud create (insert) */
--- selecionar todos os registros da tabela
-select * from contatos;
-
--- selecionar todos registros em ordem alfabética (asc desc)
-select * from contatos order by nome asc;
-select * from contatos order by nome desc;
-
-/* CRUD READ (Select) */
--- selecionar todos os registros da tabela
-select * from contatos;
-
-
-
--- selecionar todos registros em ordem alfabética (asc desc)
-select * from contatos order by nome asc;
-select * from contatos order by nome desc;
-
-
-
--- selecionar um registro específico
-select * from contatos where nome='Ana Maria';
-select * from contatos where id=1;
-
-
-
--- selecionar campos específicos da tabela
-select nome from contatos;
-select nome,fone from contatos order by nome asc;
-
-
-
--- filtrar nomes que começam com a letra B
-select * from contatos where nome like 'B%';
-
--- excluindo um registro da tabela (usar sempre o id "SEGURANÇA")
-delete from contatos where id=4;
-
--- selecionar um registro específico
-select * from contatos where nome='Ana Maria';
-select * from contatos where id=2;
-
--- selecionar campos específicos da tabela
-select nome from contatos;
-select nome,fone from contatos order by nome asc;
-/* CRUD UPDATE (update) */
--- alterando um dado específico do registro da tabela (usar sempre o id "SEGURANÇA")
-
-update contatos set fone='941234-8090' where id=4;
-update contatos set email='bia@email.com' where id=2;
--- alterando todos os dados do registro
-update contatos set nome='Willian Gates',fone='32456-9000',email='bill@outlook.com' where id=1;
-
+select * from tbOs;
