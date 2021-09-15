@@ -64,3 +64,12 @@ select * from carrinho;
 
 -- operaçoes matematicas
 select sum(valor*quantidade) as total from carrinho;
+-- Gerar o total do carrinho
+select sum(valor*quantidade) as total from carrinho;
+
+-- Alterar a quantidade de 2 produtos (ATENÇÃO!)
+update carrinho set quantidade='15' where id=5;
+update carrinho set quantidade='2' where id=10;
+
+-- Excluir um produto
+delete from carrinho where id=6;
