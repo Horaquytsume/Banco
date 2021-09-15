@@ -48,7 +48,9 @@ alter table usuarios modify login varchar (50);
 -- Armazenando um campo com criptografia (mais simples)
 insert into usuarios (usuario, login, senha)
 values ('Walace', 'admin', md5('000000'));
-
+/* CRUD READ (Select)*/
+-- é uma espécie de relatório
+-- selecionar todos os registros da tabela
 select * from usuarios;
 
 -- Tabela de clientes (clientes da assistência técnica) 
