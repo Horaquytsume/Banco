@@ -1,66 +1,25 @@
-/**
-Agenda de contatos
-Aluno: Jose walace
-Atividade Projeto Banco de dados usários - iniciado em 1/09/2021
-*/
--- Pesquisar bancos de dados disponíveis
-show databases;
+-- Tabela de usuários para estudo — MySQL.
+-- Armazene somente hashes seguros gerados pela aplicação (Argon2id, bcrypt ou scrypt).
+-- Não grave senhas em texto puro e não use MD5 para senhas.
 
--- Criando um banco de dados
-create database dbinfox;
+CREATE DATABASE IF NOT EXISTS dbinfox
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+USE dbinfox;
 
--- Remover um banco de dados
-drop database dbinfox;
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    login VARCHAR(100) NOT NULL UNIQUE,
+    senha_hash VARCHAR(255) NOT NULL
+) ENGINE=InnoDB;
 
+DESCRIBE usuarios;
+SELECT id, usuario, login FROM usuarios;
 
--- Criando uma tabela no baco de dados
-create table usuarios(
-id int primary key auto_increment,
-usuario varchar(50) not null,
-login varchar(50) not null,
-senha varchar(250) 
-);
+-- Exemplo de consulta por login:
+-- SELECT id, usuario FROM usuarios WHERE login = 'usuario@example.com';
 
--- Selecionar o banco de dados sempre que for trabalha sempre tem que iniciar
-use dbinfox;
-
--- Verificar tabelas disponível
-show tables;
-
--- Comando usado para descrever a tabela
-describe usuarios;
-
--- preenchimento único
-alter table usuarios modify login varchar(10) unique not null;
--- preenchimento não obrigatório
-alter table usuarios modify senha varchar(10); 
-
-
-
--- Comando usado para apagar um campo da tabela
-alter table usuarios drop column obs;
-
--- Comando para remover uma tabela
-drop table usuarios;
-
--- CRUD Criando o cadastro de banco de dados sem colocar o id cujo ele automáticamente distribui para diferênciar um cadastro igual
-insert into usuarios (usuario,login, senha) values ('Camila','camila@gmail.com','12345');
-
--- Armazenando um campo com criptografia
-insert into usuarios (usuario,login, senha) values ('Kratos','kratosdasilva@gmail.com', md5('1234'));
-insert into usuarios (usuario,login, senha) values ('Goku','Gokuoliveira@gmail.com', md5('46584'));
-insert into usuarios (usuario,login, senha) values ('Cidinei','cidineibatista@gmail.com', md5('48754545'));
-insert into usuarios (usuario,login, senha) values ('Vegeta','Vegeta@gmail.com', md5('42125454546'));
-insert into usuarios (usuario,login, senha) values ('Marcão','marcaodopovo@gmail.com', md5('4456464654'));
-
--- ordem alfabética pode selecionar todas as listas em ordem alfabética (asc)
-select * from usuarios order by usuario asc;
--- modificando a tabela do campo senha
-
-alter table usuarios modify senha varchar(250);
-alter table usuarios modify login varchar(50);
-
-
-select * from usuarios;
-
-
+-- Exemplo de alteração e exclusão; confira o id antes de executar.
+-- UPDATE usuarios SET usuario = 'Nome atualizado' WHERE id = 1;
+-- DELETE FROM usuarios WHERE id = 1;
